@@ -33,12 +33,23 @@ class ResultView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createBlur()
         self.resultMsgLabel.text = lossResultText
         self.resetButton.layer.cornerRadius = self.resetButton.frame.height / 2
         self.resetButton.layer.shadowColor = Constants.shadowColor
         self.resetButton.layer.shadowOffset = Constants.buttonShadowOffset
         self.resetButton.layer.shadowOpacity = Constants.buttonShadowOpacity
         self.resultMsgView.layer.cornerRadius = popUpCornerRadius
+    }
+    
+    func createBlur() {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(blurView)
+        self.view.sendSubview(toBack: blurView)
     }
     
     @IBAction func resetButtonTapped(_ sender: Any) {

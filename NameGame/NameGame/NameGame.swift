@@ -94,11 +94,8 @@ class NameGame {
         let question: String = NSLocalizedString("Who is ", comment: "Question being posed to player")
         let firstName: String = winner.firstName ?? ""
         let lastName: String = winner.lastName ?? ""
-        
-        var space: String = ""
-        if !firstName.isEmpty {
-            space = " "
-        }
+        let space: String = !firstName.isEmpty ? " " : ""
+
         return question + firstName + space + lastName + "?"
     }
 }

@@ -84,7 +84,6 @@ class NameGameViewController: UIViewController {
         // shows result view with respective win or lose statement
         let nib: UINib = UINib(nibName: "ResultViewController", bundle: nil);
         if let resultVC: ResultView = nib.instantiate(withOwner: nil, options: nil)[0] as? ResultView {
-            resultVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             resultVC.delegate = self
             resultVC.winner = game.winningProfileId == button.profileId
             resultVC.modalPresentationStyle = .overCurrentContext
