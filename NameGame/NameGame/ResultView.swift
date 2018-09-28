@@ -18,18 +18,34 @@ class ResultView: UIViewController {
     @IBOutlet weak var resultMsgLabel: UILabel!
     @IBOutlet weak var resetButton: UIButton!
     
-    var winner: Bool = false
+    // ResultVC Constants
+    let popUpCornerRadius: CGFloat = 12
+    let lossResultText: String = NSLocalizedString("Oops. That is incorrect.", comment: "User chose the wrong picture")
+    let winResultText: String = NSLocalizedString("Yes, that is correct!", comment: "User chose the correct picture")
+    
+    var winner: Bool = false {
+        didSet {
+            if winner { winningStatement() }
+        }
+    }
     
     weak var delegate: ResultViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.resultMsgLabel.text = lossResultText
         self.resetButton.layer.cornerRadius = self.resetButton.frame.height / 2
-        self.resultMsgView.layer.cornerRadius = 12
+        self.resetButton.layer.shadowColor = Constants.shadowColor
+        self.resetButton.layer.shadowOffset = Constants.buttonShadowOffset
+        self.resetButton.layer.shadowOpacity = Constants.buttonShadowOpacity
+        self.resultMsgView.layer.cornerRadius = popUpCornerRadius
     }
     
     @IBAction func resetButtonTapped(_ sender: Any) {
         self.delegate?.playAgain()
+    }
+    
+    func winningStatement() {
+        self.resultMsgLabel.text = winResultText
     }
 }

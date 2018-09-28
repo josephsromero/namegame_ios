@@ -27,7 +27,7 @@ class ProfileImageService {
         return profileImages[profileId]
     }
     
-    func fetchImage(profileId: String, url: URL, completion: () -> Void) {        
+    func fetchImage(profileId: String, url: URL, completion: @escaping () -> Void) {        
         if self.profileImages[profileId] != nil {
             completion()
         } else {
@@ -38,8 +38,8 @@ class ProfileImageService {
                     if let fetchedImage: UIImage = UIImage(data: imgData) {
                         self.profileImages[profileId] = fetchedImage
                     }
-                    completion()
                 }
+                completion()
             } catch let error {
                 print(error.localizedDescription)
                 completion()

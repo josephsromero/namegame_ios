@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import MaterialComponents.MaterialActivityIndicator
+import Foundation
+import JGProgressHUD
 
 class NameGameViewController: UIViewController {
 
@@ -16,31 +17,54 @@ class NameGameViewController: UIViewController {
     @IBOutlet weak var innerStackView2: UIStackView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet var imageButtons: [FaceButton]!
+    var startButton: UIButton!
     
     var game: NameGame = NameGame()
-    var indicator: MDCActivityIndicator = MDCActivityIndicator()
+    var loadingIndicator: JGProgressHUD = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         game.delegate = self
+
         let orientation: UIDeviceOrientation = self.view.frame.size.height > self.view.frame.size.width ? .portrait : .landscapeLeft
         configureSubviews(orientation)
         
-        //indicator.sizeToFit()
-        indicator.center = self.view.center
-        view.addSubview(indicator)
+        loadingIndicator.center = self.view.center
+        loadingIndicator.textLabel.text = NSLocalizedString("Loading", comment: "App is loading next set of images")
+        loadingIndicator.animation = JGProgressHUDFadeZoomAnimation()
+        
+        self.questionLabel.text = NSLocalizedString("The Name Game", comment: "Title of the game")
+        self.outerStackView.isHidden = true
+        createStartButton()
+
         weak var blockSelf: NameGameViewController? = self
         game.loadGameData {
-            // TODO show button to start game/ hidden before load?
-            blockSelf?.initializeGameView()
+            DispatchQueue.main.async {
+                blockSelf?.startButton.isHidden = false
+                blockSelf?.startButton.isEnabled = true
+            }
         }
     }
     
     // MARK: - Game View methods
+    private func createStartButton() {
+        self.startButton = UIButton(type: .custom)
+        startButton.frame = CGRect(x: 0, y: 0, width: 180, height: 44)
+        startButton.center = self.view.center
+        startButton.backgroundColor = Constants.willowTreeColorDark
+        startButton.layer.cornerRadius = startButton.frame.height / 2
+        startButton.setTitle(NSLocalizedString("Start Game", comment: "Start playing the game"), for: .normal)
+        startButton.setTitleColor(UIColor.white, for: .normal)
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        startButton.isHidden = true
+        startButton.isEnabled = false
+        self.view.addSubview(startButton)
+    }
+    
     private func initializeGameView() {
         DispatchQueue.main.async {
-            self.indicator.startAnimating()
+            self.loadingIndicator.show(in: self.view)
         }
         game.chooseProfiles()
         game.loadProfileImages()
@@ -48,22 +72,12 @@ class NameGameViewController: UIViewController {
     
     // Helper method for Game Question
     func poseQuestion() {
-        if let winner: Coworkers = game.sixProfiles[game.winningProfileId!] {
-            let question: String = NSLocalizedString("Who is ", comment: "Question being posed to player")
-            let firstName: String = winner.firstName ?? ""
-            let lastName: String = winner.lastName ?? ""
-            
-            var space: String = ""
-            if !firstName.isEmpty {
-                space = " "
-            }
-            self.questionLabel.text = question + firstName + space + lastName + "?"
-        }
+        self.questionLabel.text = game.questionBuilder()
     }
     
     // MARK: - Player interaction methods
     func resetGame() {
-        self.initializeGameView()
+        initializeGameView()
     }
 
     @IBAction func faceTapped(_ button: FaceButton) {
@@ -76,6 +90,12 @@ class NameGameViewController: UIViewController {
             resultVC.modalPresentationStyle = .overCurrentContext
             self.present(resultVC, animated: true, completion: nil)
         }
+    }
+    
+    @objc func startButtonTapped() {
+        self.startButton.removeFromSuperview()
+        self.outerStackView.isHidden = false
+        initializeGameView()
     }
     // MARK: -
 
@@ -101,14 +121,20 @@ class NameGameViewController: UIViewController {
 // MARK: - Delegate Implementations
 extension NameGameViewController: NameGameDelegate {
     func complete() {
+        weak var blockSelf: NameGameViewController? = self
         DispatchQueue.main.async {
-            self.indicator.stopAnimating()
+            blockSelf?.loadingIndicator.dismiss()
         }
-        var buttonIndex: Int = 0
-        for (id, _) in game.sixProfiles {
-            self.imageButtons[buttonIndex].setImage(ProfileImageService.instance().getImage(profileId: id), for: .normal)
-            self.imageButtons[buttonIndex].profileId = id
-            buttonIndex += 1
+        // element == (profileId, Coworker) tuple
+        for (index, element) in game.sixProfiles.enumerated() {
+            if let buttonImg: UIImage = ProfileImageService.instance().getImage(profileId: element.key) {
+                if let imgView: UIImageView = blockSelf?.imageButtons[index].imageView {
+                    DispatchQueue.main.async {
+                        UIView.transition(with: imgView, duration: 0.75, options: .transitionCrossDissolve, animations: {blockSelf?.imageButtons[index].setImage(buttonImg, for: .normal)}, completion: nil)
+                    }
+                }
+            }
+            blockSelf?.imageButtons[index].profileId = element.key
         }
         poseQuestion()
     }

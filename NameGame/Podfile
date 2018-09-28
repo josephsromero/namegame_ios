@@ -6,5 +6,5 @@ target 'NameGame' do
   use_frameworks!
 
   # Pods for NameGame
-  pod 'MaterialComponents/ActivityIndicator'
+  pod 'JGProgressHUD'
 end

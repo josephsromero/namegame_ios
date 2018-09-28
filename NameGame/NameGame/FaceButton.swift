@@ -10,10 +10,7 @@ import Foundation
 import UIKit
 
 open class FaceButton: UIButton {
-
-    var id: Int = 0
     var profileId: String = ""
-    var tintView: UIView = UIView(frame: CGRect.zero)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,16 +27,15 @@ open class FaceButton: UIButton {
         titleLabel?.alpha = 0.0
         
         let cornerRadius: CGFloat = self.frame.height / 2
-        self.layer.cornerRadius = cornerRadius
-        self.backgroundColor = UIColor.white
+        self.imageView?.layer.cornerRadius = cornerRadius
+        self.layer.masksToBounds = false
 
-        tintView.alpha = 0.0
-        tintView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(tintView)
-
-        tintView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        tintView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        tintView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        tintView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        addShadow()
+    }
+    
+    func addShadow() {
+        self.layer.shadowColor = Constants.shadowColor
+        self.layer.shadowOffset = Constants.shadowOffset
+        self.layer.shadowOpacity = Constants.shadowOpacity
     }
 }
