@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialActivityIndicator
 
 class NameGameViewController: UIViewController {
 
@@ -17,7 +18,7 @@ class NameGameViewController: UIViewController {
     @IBOutlet var imageButtons: [FaceButton]!
     
     var game: NameGame = NameGame()
-    var activityIndicator: UIActivityIndicatorView?
+    var indicator: MDCActivityIndicator = MDCActivityIndicator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,9 @@ class NameGameViewController: UIViewController {
         let orientation: UIDeviceOrientation = self.view.frame.size.height > self.view.frame.size.width ? .portrait : .landscapeLeft
         configureSubviews(orientation)
         
-        // Indicate the game is loading...
-        
+        //indicator.sizeToFit()
+        indicator.center = self.view.center
+        view.addSubview(indicator)
         weak var blockSelf: NameGameViewController? = self
         game.loadGameData {
             // TODO show button to start game/ hidden before load?
@@ -37,9 +39,11 @@ class NameGameViewController: UIViewController {
     
     // MARK: - Game View methods
     private func initializeGameView() {
+        DispatchQueue.main.async {
+            self.indicator.startAnimating()
+        }
         game.chooseProfiles()
         game.loadProfileImages()
-        // SVprogress.start
     }
     
     // Helper method for Game Question
@@ -57,17 +61,21 @@ class NameGameViewController: UIViewController {
         }
     }
     
-    func showResult() {
-        // To-do
-    }
-    
     // MARK: - Player interaction methods
-    private func resetGame() {
+    func resetGame() {
         self.initializeGameView()
     }
 
     @IBAction func faceTapped(_ button: FaceButton) {
-        // TO-DO
+        // shows result view with respective win or lose statement
+        let nib: UINib = UINib(nibName: "ResultViewController", bundle: nil);
+        if let resultVC: ResultView = nib.instantiate(withOwner: nil, options: nil)[0] as? ResultView {
+            resultVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            resultVC.delegate = self
+            resultVC.winner = game.winningProfileId == button.profileId
+            resultVC.modalPresentationStyle = .overCurrentContext
+            self.present(resultVC, animated: true, completion: nil)
+        }
     }
     // MARK: -
 
@@ -81,7 +89,6 @@ class NameGameViewController: UIViewController {
             innerStackView1.axis = .vertical
             innerStackView2.axis = .vertical
         }
-
         view.setNeedsLayout()
     }
 
@@ -91,16 +98,26 @@ class NameGameViewController: UIViewController {
     }
 }
 
-// MARK: - NameGameDelegate Implementation
+// MARK: - Delegate Implementations
 extension NameGameViewController: NameGameDelegate {
     func complete() {
-        // SVprogresshud.dismiss()
+        DispatchQueue.main.async {
+            self.indicator.stopAnimating()
+        }
         var buttonIndex: Int = 0
         for (id, _) in game.sixProfiles {
             self.imageButtons[buttonIndex].setImage(ProfileImageService.instance().getImage(profileId: id), for: .normal)
+            self.imageButtons[buttonIndex].profileId = id
             buttonIndex += 1
         }
-        
         poseQuestion()
+    }
+}
+
+extension NameGameViewController: ResultViewDelegate {
+    func playAgain() {
+        self.presentedViewController?.dismiss(animated: true, completion: {
+            self.resetGame()
+        })
     }
 }

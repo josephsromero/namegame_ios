@@ -1,0 +1,32 @@
+PODS:
+  - MaterialComponents/ActivityIndicator (63.0.0):
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Application
+    - MDFInternationalization
+    - MotionAnimator (~> 2.0)
+  - MaterialComponents/Palettes (63.0.0)
+  - MaterialComponents/private/Application (63.0.0)
+  - MDFInternationalization (1.1.0)
+  - MotionAnimator (2.8.1):
+    - MotionInterchange (~> 1.6)
+  - MotionInterchange (1.6.0)
+
+DEPENDENCIES:
+  - MaterialComponents/ActivityIndicator
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MaterialComponents
+    - MDFInternationalization
+    - MotionAnimator
+    - MotionInterchange
+
+SPEC CHECKSUMS:
+  MaterialComponents: 4e0c0ee000e0dcbf5214b0054767ef9f8f812264
+  MDFInternationalization: b5b8626628abf026e630e5ebaeee563037712cbb
+  MotionAnimator: ee16aa30567c5bae0fb2750c132915829cfaaf8a
+  MotionInterchange: ead0e3ae1f3a5fb539e289debbc7ae036160a10d
+
+PODFILE CHECKSUM: c6ca28fed2a7f88bb0cac1d16b1099253e609fa0
+
+COCOAPODS: 1.5.2

@@ -31,9 +31,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Hu-Cm-Caz" firstAttribute="top" secondItem="Ajs-ZN-VO3" secondAttribute="bottom" constant="338" id="2qS-4A-8UU"/>
-                            <constraint firstItem="Ajs-ZN-VO3" firstAttribute="top" secondItem="EVu-iE-aUb" secondAttribute="bottom" constant="137" id="BZi-Tl-KgE"/>
                             <constraint firstItem="Ajs-ZN-VO3" firstAttribute="centerX" secondItem="33H-7W-ioH" secondAttribute="centerX" id="QhU-8w-65j"/>
+                            <constraint firstItem="Ajs-ZN-VO3" firstAttribute="top" secondItem="EVu-iE-aUb" secondAttribute="bottom" constant="137" id="pxb-EV-i9c"/>
                         </constraints>
                     </view>
                 </viewController>

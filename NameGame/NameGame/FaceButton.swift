@@ -12,6 +12,7 @@ import UIKit
 open class FaceButton: UIButton {
 
     var id: Int = 0
+    var profileId: String = ""
     var tintView: UIView = UIView(frame: CGRect.zero)
 
     override init(frame: CGRect) {
@@ -27,6 +28,10 @@ open class FaceButton: UIButton {
     func setup() {
         setTitleColor(.white, for: .normal)
         titleLabel?.alpha = 0.0
+        
+        let cornerRadius: CGFloat = self.frame.height / 2
+        self.layer.cornerRadius = cornerRadius
+        self.backgroundColor = UIColor.white
 
         tintView.alpha = 0.0
         tintView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +42,4 @@ open class FaceButton: UIButton {
         tintView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         tintView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-
-    // TODO: Show the user's face on the button.
 }
