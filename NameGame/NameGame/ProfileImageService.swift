@@ -27,21 +27,23 @@ class ProfileImageService {
         return profileImages[profileId]
     }
     
-    func fetchImage(profileId: String, url: URL, completion: @escaping () -> Void) {
-        guard self.profileImages[profileId] == nil else { return }
-
-        do {
-            let urlString: String = "https:" + "\(url)"
-            if let fullUrl: URL = URL(string: urlString) {
-                let imgData: Data = try Data(contentsOf: fullUrl)
-                if let fetchedImage: UIImage = UIImage(data: imgData) {
-                    self.profileImages[profileId] = fetchedImage
+    func fetchImage(profileId: String, url: URL, completion: @escaping () -> Void) {        
+        if self.profileImages[profileId] != nil {
+            completion()
+        } else {
+            do {
+                let urlString: String = "https:" + "\(url)"
+                if let fullUrl: URL = URL(string: urlString) {
+                    let imgData: Data = try Data(contentsOf: fullUrl)
+                    if let fetchedImage: UIImage = UIImage(data: imgData) {
+                        self.profileImages[profileId] = fetchedImage
+                    }
                 }
                 completion()
+            } catch let error {
+                print(error.localizedDescription)
+                completion()
             }
-        } catch let error {
-            print(error.localizedDescription)
-            completion()
         }
     }
 }

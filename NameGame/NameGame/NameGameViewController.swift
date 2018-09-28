@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import JGProgressHUD
 
 class NameGameViewController: UIViewController {
 
@@ -15,59 +17,84 @@ class NameGameViewController: UIViewController {
     @IBOutlet weak var innerStackView2: UIStackView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet var imageButtons: [FaceButton]!
+    var startButton: UIButton!
     
     var game: NameGame = NameGame()
-    var activityIndicator: UIActivityIndicatorView?
+    var loadingIndicator: JGProgressHUD = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         game.delegate = self
+
         let orientation: UIDeviceOrientation = self.view.frame.size.height > self.view.frame.size.width ? .portrait : .landscapeLeft
         configureSubviews(orientation)
         
-        // Indicate the game is loading...
+        loadingIndicator.center = self.view.center
+        loadingIndicator.textLabel.text = NSLocalizedString("Loading", comment: "App is loading next set of images")
+        loadingIndicator.animation = JGProgressHUDFadeZoomAnimation()
         
+        self.questionLabel.text = NSLocalizedString("The Name Game", comment: "Title of the game")
+        self.outerStackView.isHidden = true
+        createStartButton()
+
         weak var blockSelf: NameGameViewController? = self
         game.loadGameData {
-            // TODO show button to start game/ hidden before load?
-            blockSelf?.initializeGameView()
+            DispatchQueue.main.async {
+                blockSelf?.startButton.isHidden = false
+                blockSelf?.startButton.isEnabled = true
+            }
         }
     }
     
     // MARK: - Game View methods
+    private func createStartButton() {
+        self.startButton = UIButton(type: .custom)
+        startButton.frame = CGRect(x: 0, y: 0, width: 180, height: 44)
+        startButton.center = self.view.center
+        startButton.backgroundColor = Constants.willowTreeColorDark
+        startButton.layer.cornerRadius = startButton.frame.height / 2
+        startButton.setTitle(NSLocalizedString("Start Game", comment: "Start playing the game"), for: .normal)
+        startButton.setTitleColor(UIColor.white, for: .normal)
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        startButton.isHidden = true
+        startButton.isEnabled = false
+        self.view.addSubview(startButton)
+    }
+    
     private func initializeGameView() {
+        DispatchQueue.main.async {
+            self.loadingIndicator.show(in: self.view)
+        }
         game.chooseProfiles()
         game.loadProfileImages()
-        // SVprogress.start
     }
     
     // Helper method for Game Question
     func poseQuestion() {
-        if let winner: Coworkers = game.sixProfiles[game.winningProfileId!] {
-            let question: String = NSLocalizedString("Who is ", comment: "Question being posed to player")
-            let firstName: String = winner.firstName ?? ""
-            let lastName: String = winner.lastName ?? ""
-            
-            var space: String = ""
-            if !firstName.isEmpty {
-                space = " "
-            }
-            self.questionLabel.text = question + firstName + space + lastName + "?"
-        }
-    }
-    
-    func showResult() {
-        // To-do
+        self.questionLabel.text = game.questionBuilder()
     }
     
     // MARK: - Player interaction methods
-    private func resetGame() {
-        self.initializeGameView()
+    func resetGame() {
+        initializeGameView()
     }
 
     @IBAction func faceTapped(_ button: FaceButton) {
-        // TO-DO
+        // shows result view with respective win or lose statement
+        let nib: UINib = UINib(nibName: "ResultViewController", bundle: nil);
+        if let resultVC: ResultView = nib.instantiate(withOwner: nil, options: nil)[0] as? ResultView {
+            resultVC.delegate = self
+            resultVC.winner = game.winningProfileId == button.profileId
+            resultVC.modalPresentationStyle = .overCurrentContext
+            self.present(resultVC, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func startButtonTapped() {
+        self.startButton.removeFromSuperview()
+        self.outerStackView.isHidden = false
+        initializeGameView()
     }
     // MARK: -
 
@@ -81,7 +108,6 @@ class NameGameViewController: UIViewController {
             innerStackView1.axis = .vertical
             innerStackView2.axis = .vertical
         }
-
         view.setNeedsLayout()
     }
 
@@ -91,16 +117,32 @@ class NameGameViewController: UIViewController {
     }
 }
 
-// MARK: - NameGameDelegate Implementation
+// MARK: - Delegate Implementations
 extension NameGameViewController: NameGameDelegate {
     func complete() {
-        // SVprogresshud.dismiss()
-        var buttonIndex: Int = 0
-        for (id, _) in game.sixProfiles {
-            self.imageButtons[buttonIndex].setImage(ProfileImageService.instance().getImage(profileId: id), for: .normal)
-            buttonIndex += 1
+        weak var blockSelf: NameGameViewController? = self
+        DispatchQueue.main.async {
+            blockSelf?.loadingIndicator.dismiss()
         }
-        
+        // element == (profileId, Coworker) tuple
+        for (index, element) in game.sixProfiles.enumerated() {
+            if let buttonImg: UIImage = ProfileImageService.instance().getImage(profileId: element.key) {
+                if let imgView: UIImageView = blockSelf?.imageButtons[index].imageView {
+                    DispatchQueue.main.async {
+                        UIView.transition(with: imgView, duration: 0.75, options: .transitionCrossDissolve, animations: {blockSelf?.imageButtons[index].setImage(buttonImg, for: .normal)}, completion: nil)
+                    }
+                }
+            }
+            blockSelf?.imageButtons[index].profileId = element.key
+        }
         poseQuestion()
+    }
+}
+
+extension NameGameViewController: ResultViewDelegate {
+    func playAgain() {
+        self.presentedViewController?.dismiss(animated: true, completion: {
+            self.resetGame()
+        })
     }
 }

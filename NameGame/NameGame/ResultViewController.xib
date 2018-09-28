@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ResultView" customModule="NameGame" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController restorationIdentifier="ResultView" id="fb0-zE-aXO" customClass="ResultView" customModule="NameGame" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="D0m-NB-ddZ">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1a-m4-wBq">
+                        <rect key="frame" x="55.5" y="266" width="264" height="172"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guess Again! That is..." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05Y-3v-nBr">
+                                <rect key="frame" x="8" y="8" width="248" height="26"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDZ-3c-XW4">
+                                <rect key="frame" x="84" y="120" width="96" height="44"/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.54117647059999996" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="61C-mH-F5G"/>
+                                    <constraint firstAttribute="width" constant="96" id="eTE-77-EOH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                <state key="normal" title="Play Again">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButtonTapped:" destination="fb0-zE-aXO" eventType="touchUpInside" id="MEP-m4-3di"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ljo-yo-hec" firstAttribute="trailing" secondItem="05Y-3v-nBr" secondAttribute="trailing" constant="8" id="1Yj-CR-PBN"/>
+                            <constraint firstAttribute="width" constant="264" id="Aq6-ZE-Oiz"/>
+                            <constraint firstItem="05Y-3v-nBr" firstAttribute="leading" secondItem="Ljo-yo-hec" secondAttribute="leading" constant="8" id="JEZ-Ad-zt3"/>
+                            <constraint firstItem="05Y-3v-nBr" firstAttribute="top" secondItem="Ljo-yo-hec" secondAttribute="top" constant="8" id="LO2-ft-lcJ"/>
+                            <constraint firstItem="Ljo-yo-hec" firstAttribute="bottom" secondItem="wDZ-3c-XW4" secondAttribute="bottom" constant="8" id="NmB-CS-kyx"/>
+                            <constraint firstItem="wDZ-3c-XW4" firstAttribute="centerX" secondItem="Ljo-yo-hec" secondAttribute="centerX" id="fh4-JW-sJ5"/>
+                            <constraint firstAttribute="height" constant="172" id="ojj-d6-iRF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ljo-yo-hec"/>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="F1a-m4-wBq" firstAttribute="centerY" secondItem="NDj-4a-nPt" secondAttribute="centerY" constant="8.5" id="LUM-Je-fgC"/>
+                    <constraint firstItem="F1a-m4-wBq" firstAttribute="centerX" secondItem="NDj-4a-nPt" secondAttribute="centerX" id="myX-7K-PzE"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="NDj-4a-nPt"/>
+            </view>
+            <connections>
+                <outlet property="resetButton" destination="wDZ-3c-XW4" id="eld-XZ-dk3"/>
+                <outlet property="resultMsgLabel" destination="05Y-3v-nBr" id="q8P-q5-Tpw"/>
+                <outlet property="resultMsgView" destination="F1a-m4-wBq" id="SAt-Ry-iOg"/>
+            </connections>
+            <point key="canvasLocation" x="48.799999999999997" y="204.64767616191907"/>
+        </viewController>
+    </objects>
+</document>
