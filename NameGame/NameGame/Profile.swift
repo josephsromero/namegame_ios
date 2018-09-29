@@ -10,6 +10,7 @@ import Foundation
 
 class Profile: Codable {
     var id: String?
+    var jobTitle: String?
     var firstName: String?
     var lastName: String?
     var headshot: Headshot?

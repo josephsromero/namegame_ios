@@ -64,8 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				ECF50AB41C9331CA00C41A1D /* FaceButton.swift */,
-				3429363F215DA091000B9A80 /* ResultViewController.swift */,
-				34293641215DA846000B9A80 /* ResultViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -73,8 +71,8 @@
 		347CA2D4215B02F5007985AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				347CA2D5215B032D007985AA /* Profile.swift */,
 				347CA2D7215B0569007985AA /* Headshot.swift */,
+				347CA2D5215B032D007985AA /* Profile.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -90,11 +88,21 @@
 		347CA2DE215BFCA2007985AA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				34C03FEA215FFFFE001B45D2 /* ProfileService.swift */,
 				347CA2DF215BFCDE007985AA /* ProfileImageService.swift */,
 				34C03FE8215FFACE001B45D2 /* NetworkService.swift */,
-				34C03FEA215FFFFE001B45D2 /* ProfileService.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		34C03FEC21600A7B001B45D2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EC6A1AB81C8F6E5A0071F529 /* NameGameViewController.swift */,
+				3429363F215DA091000B9A80 /* ResultViewController.swift */,
+				34293641215DA846000B9A80 /* ResultViewController.xib */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		B1BA30910675BDD4ABCABC6E /* Pods */ = {
@@ -127,11 +135,11 @@
 		EC6A1AB51C8F6E5A0071F529 /* NameGame */ = {
 			isa = PBXGroup;
 			children = (
+				34C03FEC21600A7B001B45D2 /* Controllers */,
 				347CA2DE215BFCA2007985AA /* Services */,
 				347CA2DB215B12B1007985AA /* Common */,
 				347CA2D4215B02F5007985AA /* Models */,
 				EC6A1AB61C8F6E5A0071F529 /* AppDelegate.swift */,
-				EC6A1AB81C8F6E5A0071F529 /* NameGameViewController.swift */,
 				03CE45601DD1302700ABF7FA /* NameGame.swift */,
 				0390A0101DDE529600C701A0 /* Views */,
 				EC6A1ABA1C8F6E5A0071F529 /* Main.storyboard */,

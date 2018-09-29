@@ -40,9 +40,9 @@ class ProfileService {
     func filterOn(gameType: GameTypes) -> [Profile] {
         switch gameType {
         case .matt:
-            return profiles
+            return self.profiles.filter({ $0.firstName != nil && ($0.firstName!.lowercased() == "matt" || $0.firstName!.lowercased() == "matthew")})
         case .team:
-            return profiles
+            return self.profiles.filter({ $0.jobTitle != nil })
         default:
             return profiles
         }

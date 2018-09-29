@@ -131,7 +131,7 @@ extension NameGameViewController: NameGameDelegate, ResultViewControllerDelegate
             blockSelf?.loadingIndicator.dismiss()
         }
         // element == (profileId, Coworker) tuple
-        for (index, element) in game.sixProfiles.enumerated() {
+        for (index, element) in game.gameProfiles.enumerated() {
             if let buttonImg: UIImage = ProfileImageService.instance().getImage(profileId: element.key) {
                 if let imgView: UIImageView = blockSelf?.imageButtons[index].imageView {
                     DispatchQueue.main.async {

@@ -25,8 +25,7 @@ class NameGame {
     private var gameMode: GameTypes = GameTypes.standard
     private var networkService: NetworkService
     // Collections for profile data
-    var profiles: [Profile] = [Profile]()
-    var sixProfiles: [String: Profile] = [String: Profile]()
+    var gameProfiles: [String: Profile] = [String: Profile]()
 
     var winningProfileId: String?
     let numberPeople = 6
@@ -44,15 +43,18 @@ class NameGame {
     }
     
     func chooseProfiles() {
-        sixProfiles.removeAll()
+        gameProfiles.removeAll()
         var count: Int = 0
+        let filteredProfiles: [Profile] = ProfileService.instance().filterOn(gameType: self.gameMode)
         
         while count < numberPeople {
-            let randIndex: Int = Int.random(in: 0..<ProfileService.instance().count())
-            let profile: Profile = ProfileService.instance().get(index: randIndex)
+            let randIndex: Int = Int.random(in: 0..<filteredProfiles.count)
+            let profile: Profile = filteredProfiles[randIndex]
             if profile.headshot!.url != nil {
-                sixProfiles[profile.id!] = profile
-                count += 1
+                if gameProfiles[profile.id!] == nil {
+                    gameProfiles[profile.id!] = profile
+                    count += 1
+                }
             }
             
             // Select a profile for winState
@@ -64,7 +66,7 @@ class NameGame {
     
     func loadProfileImages() {
         let dispatch: DispatchGroup = DispatchGroup()
-        for (id, profile) in self.sixProfiles {
+        for (id, profile) in self.gameProfiles {
             let url: URL = profile.headshot!.url!
             // Use dispatch to sync img loading tasks
             dispatch.enter()
@@ -79,7 +81,7 @@ class NameGame {
     }
     
     func questionBuilder() -> String {
-        guard let winner: Profile = self.sixProfiles[self.winningProfileId ?? ""] else {
+        guard let winner: Profile = self.gameProfiles[self.winningProfileId ?? ""] else {
             return NSLocalizedString("The Name Game", comment: "Title of the game")
         }
 
