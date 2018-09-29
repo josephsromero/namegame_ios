@@ -38,6 +38,8 @@ class ProfileImageService {
                     if let fetchedImage: UIImage = UIImage(data: imgData) {
                         self.profileImages[profileId] = fetchedImage
                     }
+                } else {
+                    self.profileImages[profileId] = UIImage.init(named: "WTPlaceholder")
                 }
                 completion()
             } catch let error {

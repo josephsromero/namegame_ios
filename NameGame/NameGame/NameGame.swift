@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public enum GameTypes {
+public enum GameTypes: String {
     case standard
     case matt
     case team
@@ -24,20 +24,23 @@ class NameGame {
     
     private var gameMode: GameTypes = GameTypes.standard
     private var networkService: NetworkService
-    // Collections for profile data
+    
+    // Collection for profiles used in a game session
     var gameProfiles: [String: Profile] = [String: Profile]()
-
     var winningProfileId: String?
     let numberPeople = 6
     
-    init(gameMode: GameTypes, networkService: NetworkService) {
-        self.gameMode = gameMode
+    init(networkService: NetworkService) {
         self.networkService = networkService
+    }
+    
+    func setGameMode(gameMode: GameTypes) {
+        self.gameMode = gameMode
     }
     
     // Load JSON data from API
     func loadGameData(completion: @escaping () -> Void) {
-        self.networkService.getProfiles {
+        networkService.getProfiles {
             completion()
         }
     }
@@ -68,6 +71,7 @@ class NameGame {
         let dispatch: DispatchGroup = DispatchGroup()
         for (id, profile) in self.gameProfiles {
             let url: URL = profile.headshot!.url!
+
             // Use dispatch to sync img loading tasks
             dispatch.enter()
             ProfileImageService.instance().fetchImage(profileId: id, url: url) {

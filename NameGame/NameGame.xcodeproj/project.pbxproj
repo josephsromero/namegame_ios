@@ -15,6 +15,7 @@
 		347CA2D8215B0569007985AA /* Headshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2D7215B0569007985AA /* Headshot.swift */; };
 		347CA2DD215B12C3007985AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2DC215B12C3007985AA /* Constants.swift */; };
 		347CA2E0215BFCDE007985AA /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2DF215BFCDE007985AA /* ProfileImageService.swift */; };
+		34A0C7DF21602E2600A849F7 /* UIButton+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A0C7DE21602E2600A849F7 /* UIButton+Effects.swift */; };
 		34C03FE9215FFACE001B45D2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C03FE8215FFACE001B45D2 /* NetworkService.swift */; };
 		34C03FEB215FFFFE001B45D2 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C03FEA215FFFFE001B45D2 /* ProfileService.swift */; };
 		E1CDEF0F9E4398FCCAFD789E /* Pods_NameGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426E0830766D7E590C1C2C9F /* Pods_NameGame.framework */; };
@@ -34,6 +35,7 @@
 		347CA2D7215B0569007985AA /* Headshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headshot.swift; sourceTree = "<group>"; };
 		347CA2DC215B12C3007985AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		347CA2DF215BFCDE007985AA /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
+		34A0C7DE21602E2600A849F7 /* UIButton+Effects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Effects.swift"; sourceTree = "<group>"; };
 		34C03FE8215FFACE001B45D2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		34C03FEA215FFFFE001B45D2 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		426E0830766D7E590C1C2C9F /* Pods_NameGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NameGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				347CA2DC215B12C3007985AA /* Constants.swift */,
+				34A0C7DE21602E2600A849F7 /* UIButton+Effects.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				347CA2D6215B032D007985AA /* Profile.swift in Sources */,
 				347CA2D8215B0569007985AA /* Headshot.swift in Sources */,
 				347CA2DD215B12C3007985AA /* Constants.swift in Sources */,
+				34A0C7DF21602E2600A849F7 /* UIButton+Effects.swift in Sources */,
 				34C03FEB215FFFFE001B45D2 /* ProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

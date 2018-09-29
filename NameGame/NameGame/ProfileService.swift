@@ -10,8 +10,7 @@ import Foundation
 
 class ProfileService {
     private static var theInstance: ProfileService?
-    
-    // collection to store fetched images, can reduce time to fetch future images
+
     private var profiles: [Profile] = [Profile]()
     
     public static func instance() -> ProfileService {
@@ -26,23 +25,23 @@ class ProfileService {
     }
     
     func get(index: Int) -> Profile {
-        return self.profiles[index]
+        return profiles[index]
     }
     
     func clear() {
-        profiles.removeAll()
+        self.profiles.removeAll()
     }
     
     func count() -> Int {
-        return self.profiles.count
+        return profiles.count
     }
     
     func filterOn(gameType: GameTypes) -> [Profile] {
         switch gameType {
         case .matt:
-            return self.profiles.filter({ $0.firstName != nil && ($0.firstName!.lowercased() == "matt" || $0.firstName!.lowercased() == "matthew")})
+            return profiles.filter({ $0.firstName != nil && ($0.firstName!.lowercased() == "matt" || $0.firstName!.lowercased() == "matthew")})
         case .team:
-            return self.profiles.filter({ $0.jobTitle != nil })
+            return profiles.filter({ $0.jobTitle != nil })
         default:
             return profiles
         }

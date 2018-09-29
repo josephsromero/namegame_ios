@@ -37,9 +37,7 @@ class ResultViewController: UIViewController {
         createBlur()
         self.resultMsgLabel.text = lossResultText
         self.resetButton.layer.cornerRadius = self.resetButton.frame.height / 2
-        self.resetButton.layer.shadowColor = Constants.shadowColor
-        self.resetButton.layer.shadowOffset = Constants.retryButtonShadowOffset
-        self.resetButton.layer.shadowOpacity = Constants.buttonShadowOpacity
+        self.resetButton = resetButton.addShadowToButton()
         self.resultMsgView.layer.cornerRadius = popUpCornerRadius
     }
     
