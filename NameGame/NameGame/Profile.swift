@@ -1,5 +1,5 @@
 //
-//  Coworkers.swift
+//  Profile.swift
 //  NameGame
 //
 //  Created by Romero, Joseph on 9/25/18.
@@ -8,8 +8,9 @@
 
 import Foundation
 
-class Coworkers: Codable {
+class Profile: Codable {
     var id: String?
+    var jobTitle: String?
     var firstName: String?
     var lastName: String?
     var headshot: Headshot?
