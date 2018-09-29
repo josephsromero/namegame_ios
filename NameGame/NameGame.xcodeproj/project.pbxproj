@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		03909FE01DDE4ACE00C701A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03909FDF1DDE4ACE00C701A0 /* LaunchScreen.storyboard */; };
 		03CE45611DD1302700ABF7FA /* NameGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE45601DD1302700ABF7FA /* NameGame.swift */; };
-		34293640215DA091000B9A80 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3429363F215DA091000B9A80 /* ResultView.swift */; };
+		34293640215DA091000B9A80 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3429363F215DA091000B9A80 /* ResultViewController.swift */; };
 		34293642215DA846000B9A80 /* ResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34293641215DA846000B9A80 /* ResultViewController.xib */; };
-		347CA2D6215B032D007985AA /* Coworkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2D5215B032D007985AA /* Coworkers.swift */; };
+		347CA2D6215B032D007985AA /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2D5215B032D007985AA /* Profile.swift */; };
 		347CA2D8215B0569007985AA /* Headshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2D7215B0569007985AA /* Headshot.swift */; };
 		347CA2DD215B12C3007985AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2DC215B12C3007985AA /* Constants.swift */; };
 		347CA2E0215BFCDE007985AA /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347CA2DF215BFCDE007985AA /* ProfileImageService.swift */; };
+		34C03FE9215FFACE001B45D2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C03FE8215FFACE001B45D2 /* NetworkService.swift */; };
+		34C03FEB215FFFFE001B45D2 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C03FEA215FFFFE001B45D2 /* ProfileService.swift */; };
 		E1CDEF0F9E4398FCCAFD789E /* Pods_NameGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426E0830766D7E590C1C2C9F /* Pods_NameGame.framework */; };
 		EC6A1AB71C8F6E5A0071F529 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A1AB61C8F6E5A0071F529 /* AppDelegate.swift */; };
 		EC6A1AB91C8F6E5A0071F529 /* NameGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A1AB81C8F6E5A0071F529 /* NameGameViewController.swift */; };
@@ -26,12 +28,14 @@
 /* Begin PBXFileReference section */
 		03909FDF1DDE4ACE00C701A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03CE45601DD1302700ABF7FA /* NameGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameGame.swift; sourceTree = "<group>"; };
-		3429363F215DA091000B9A80 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		3429363F215DA091000B9A80 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		34293641215DA846000B9A80 /* ResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultViewController.xib; sourceTree = "<group>"; };
-		347CA2D5215B032D007985AA /* Coworkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coworkers.swift; sourceTree = "<group>"; };
+		347CA2D5215B032D007985AA /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		347CA2D7215B0569007985AA /* Headshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headshot.swift; sourceTree = "<group>"; };
 		347CA2DC215B12C3007985AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		347CA2DF215BFCDE007985AA /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
+		34C03FE8215FFACE001B45D2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		34C03FEA215FFFFE001B45D2 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		426E0830766D7E590C1C2C9F /* Pods_NameGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NameGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF783D4BFC8088AD553A521 /* Pods-NameGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NameGame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NameGame/Pods-NameGame.debug.xcconfig"; sourceTree = "<group>"; };
 		EC6A1AB31C8F6E5A0071F529 /* NameGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NameGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				ECF50AB41C9331CA00C41A1D /* FaceButton.swift */,
-				3429363F215DA091000B9A80 /* ResultView.swift */,
+				3429363F215DA091000B9A80 /* ResultViewController.swift */,
 				34293641215DA846000B9A80 /* ResultViewController.xib */,
 			);
 			name = Views;
@@ -69,7 +73,7 @@
 		347CA2D4215B02F5007985AA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				347CA2D5215B032D007985AA /* Coworkers.swift */,
+				347CA2D5215B032D007985AA /* Profile.swift */,
 				347CA2D7215B0569007985AA /* Headshot.swift */,
 			);
 			name = Models;
@@ -87,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				347CA2DF215BFCDE007985AA /* ProfileImageService.swift */,
+				34C03FE8215FFACE001B45D2 /* NetworkService.swift */,
+				34C03FEA215FFFFE001B45D2 /* ProfileService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -259,15 +265,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34C03FE9215FFACE001B45D2 /* NetworkService.swift in Sources */,
 				EC6A1AB91C8F6E5A0071F529 /* NameGameViewController.swift in Sources */,
 				347CA2E0215BFCDE007985AA /* ProfileImageService.swift in Sources */,
-				34293640215DA091000B9A80 /* ResultView.swift in Sources */,
+				34293640215DA091000B9A80 /* ResultViewController.swift in Sources */,
 				EC6A1AB71C8F6E5A0071F529 /* AppDelegate.swift in Sources */,
 				03CE45611DD1302700ABF7FA /* NameGame.swift in Sources */,
 				ECF50AB51C9331CA00C41A1D /* FaceButton.swift in Sources */,
-				347CA2D6215B032D007985AA /* Coworkers.swift in Sources */,
+				347CA2D6215B032D007985AA /* Profile.swift in Sources */,
 				347CA2D8215B0569007985AA /* Headshot.swift in Sources */,
 				347CA2DD215B12C3007985AA /* Constants.swift in Sources */,
+				34C03FEB215FFFFE001B45D2 /* ProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

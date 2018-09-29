@@ -1,5 +1,5 @@
 //
-//  ResultView.swift
+//  ResultViewController.swift
 //  NameGame
 //
 //  Created by Romero, Joseph on 9/27/18.
@@ -9,19 +9,19 @@
 import Foundation
 import UIKit
 
-protocol ResultViewDelegate: class {
+protocol ResultViewControllerDelegate: class {
     func playAgain() -> Void
 }
 
-class ResultView: UIViewController {
+class ResultViewController: UIViewController {
     @IBOutlet weak var resultMsgView: UIView!
     @IBOutlet weak var resultMsgLabel: UILabel!
     @IBOutlet weak var resetButton: UIButton!
     
     // ResultVC Constants
     let popUpCornerRadius: CGFloat = 12
-    let lossResultText: String = NSLocalizedString("Oops. That is incorrect.", comment: "User chose the wrong picture")
-    let winResultText: String = NSLocalizedString("Yes, that is correct!", comment: "User chose the correct picture")
+    let lossResultText: String = NSLocalizedString("That is incorrect.", comment: "User chose the wrong picture")
+    let winResultText: String = NSLocalizedString("That is correct!", comment: "User chose the correct picture")
     
     var winner: Bool = false {
         didSet {
@@ -29,7 +29,7 @@ class ResultView: UIViewController {
         }
     }
     
-    weak var delegate: ResultViewDelegate?
+    weak var delegate: ResultViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class ResultView: UIViewController {
         self.resultMsgLabel.text = lossResultText
         self.resetButton.layer.cornerRadius = self.resetButton.frame.height / 2
         self.resetButton.layer.shadowColor = Constants.shadowColor
-        self.resetButton.layer.shadowOffset = Constants.buttonShadowOffset
+        self.resetButton.layer.shadowOffset = Constants.retryButtonShadowOffset
         self.resetButton.layer.shadowOpacity = Constants.buttonShadowOpacity
         self.resultMsgView.layer.cornerRadius = popUpCornerRadius
     }

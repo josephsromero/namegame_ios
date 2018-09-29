@@ -19,12 +19,14 @@ class NameGameViewController: UIViewController {
     @IBOutlet var imageButtons: [FaceButton]!
     var startButton: UIButton!
     
-    var game: NameGame = NameGame()
+    var game: NameGame!
     var loadingIndicator: JGProgressHUD = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let networkService: NetworkService = NetworkService()
+        game = NameGame(gameMode: .standard, networkService: networkService)
         game.delegate = self
 
         let orientation: UIDeviceOrientation = self.view.frame.size.height > self.view.frame.size.width ? .portrait : .landscapeLeft
@@ -83,7 +85,7 @@ class NameGameViewController: UIViewController {
     @IBAction func faceTapped(_ button: FaceButton) {
         // shows result view with respective win or lose statement
         let nib: UINib = UINib(nibName: "ResultViewController", bundle: nil);
-        if let resultVC: ResultView = nib.instantiate(withOwner: nil, options: nil)[0] as? ResultView {
+        if let resultVC: ResultViewController = nib.instantiate(withOwner: nil, options: nil)[0] as? ResultViewController {
             resultVC.delegate = self
             resultVC.winner = game.winningProfileId == button.profileId
             resultVC.modalPresentationStyle = .overCurrentContext
@@ -118,7 +120,7 @@ class NameGameViewController: UIViewController {
 }
 
 // MARK: - Delegate Implementations
-extension NameGameViewController: NameGameDelegate {
+extension NameGameViewController: NameGameDelegate, ResultViewControllerDelegate {
     func complete() {
         weak var blockSelf: NameGameViewController? = self
         DispatchQueue.main.async {
@@ -137,9 +139,7 @@ extension NameGameViewController: NameGameDelegate {
         }
         poseQuestion()
     }
-}
-
-extension NameGameViewController: ResultViewDelegate {
+    
     func playAgain() {
         self.presentedViewController?.dismiss(animated: true, completion: {
             self.resetGame()

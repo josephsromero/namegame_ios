@@ -13,7 +13,4 @@ class Headshot: Codable {
     var id: String?
     var mimeType: String?
     var url: URL?
-    
-//    var height
-//    var width
 }
