@@ -79,7 +79,9 @@ class NameGame {
     }
     
     func questionBuilder() -> String {
-        guard let winner: Profile = self.sixProfiles[self.winningProfileId!] else { return "?" }
+        guard let winner: Profile = self.sixProfiles[self.winningProfileId ?? ""] else {
+            return NSLocalizedString("The Name Game", comment: "Title of the game")
+        }
 
         let question: String = NSLocalizedString("Who is ", comment: "Question being posed to player")
         let firstName: String = winner.firstName ?? ""

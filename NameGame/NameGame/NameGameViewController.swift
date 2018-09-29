@@ -18,9 +18,9 @@ class NameGameViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet var imageButtons: [FaceButton]!
     var startButton: UIButton!
-    
+    var loadingIndicator: JGProgressHUD!
+
     var game: NameGame!
-    var loadingIndicator: JGProgressHUD = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +31,10 @@ class NameGameViewController: UIViewController {
 
         let orientation: UIDeviceOrientation = self.view.frame.size.height > self.view.frame.size.width ? .portrait : .landscapeLeft
         configureSubviews(orientation)
-        
-        loadingIndicator.center = self.view.center
-        loadingIndicator.textLabel.text = NSLocalizedString("Loading", comment: "App is loading next set of images")
-        loadingIndicator.animation = JGProgressHUDFadeZoomAnimation()
-        
-        self.questionLabel.text = NSLocalizedString("The Name Game", comment: "Title of the game")
         self.outerStackView.isHidden = true
+        
+        poseQuestion()
+        createLoadingIndicator()
         createStartButton()
 
         weak var blockSelf: NameGameViewController? = self
@@ -62,6 +59,13 @@ class NameGameViewController: UIViewController {
         startButton.isHidden = true
         startButton.isEnabled = false
         self.view.addSubview(startButton)
+    }
+    
+    private func createLoadingIndicator() {
+        self.loadingIndicator = JGProgressHUD(style: .dark)
+        loadingIndicator.center = self.view.center
+        loadingIndicator.textLabel.text = NSLocalizedString("Loading", comment: "App is loading next set of images")
+        loadingIndicator.animation = JGProgressHUDFadeZoomAnimation()
     }
     
     private func initializeGameView() {
